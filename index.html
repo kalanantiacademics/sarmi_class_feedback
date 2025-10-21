@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Feedback Pertemuan</title>
+    <title>Formulir Feedback Pelatihan Guru KKA Sarmi 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,8 +11,8 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s;
         }
-        /* Menyembunyikan step form yang tidak aktif */
         .form-step:not(.active) {
             display: none;
         }
@@ -23,10 +23,10 @@
             appearance: none;
             width: 100%;
             height: 10px;
-            background: #4F46E5; /* indigo-600 */
+            background: #D4FC79; /* lime-400 as track */
             border-radius: 5px;
             outline: none;
-            opacity: 0.8;
+            opacity: 0.9;
             transition: opacity .2s;
         }
 
@@ -37,33 +37,48 @@
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 28px;
-            height: 28px;
-            background: #D4FC79;
+            width: 26px;
+            height: 26px;
+            background: #3C29E7; /* dark blue thumb */
             cursor: pointer;
             border-radius: 50%;
-            border: 3px solid #3C29E7;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            border: 3px solid #D4FC79; /* lime border */
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
         }
 
         input[type=range]::-moz-range-thumb {
-            width: 28px;
-            height: 28px;
-            background: #D4FC79;
+            width: 26px;
+            height: 26px;
+            background: #3C29E7;
             cursor: pointer;
             border-radius: 50%;
-            border: 3px solid #3C29E7;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            border: 3px solid #D4FC79;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
         }
+
+        .rating-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: #ccc; /* light text for min/max labels */
+        }
+
+        /* Focus styles for inputs */
+        input:focus, textarea:focus, select:focus {
+            box-shadow: 0 0 0 3px rgba(212, 252, 121, 0.5); /* Focus ring for indigo fields */
+            outline: none;
+        }
+
     </style>
 </head>
 <body class="bg-[#D4FC79] min-h-screen flex items-center justify-center p-4">
-    <div class="w-full max-w-2xl mx-auto">
+    <div class="w-full max-w-3xl mx-auto">
         <div id="feedback-form-container" class="bg-[#3C29E7] text-white rounded-2xl shadow-2xl p-6 sm:p-10 transition-all duration-500">
             <!-- Header Form -->
             <div class="text-center mb-6">
-                <h1 class="text-3xl sm:text-4xl font-black tracking-tight uppercase">Form Feedback</h1>
-                <p class="text-indigo-200 mt-2">Isi feedback untuk membantu kami lebih baik lagi!</p>
+                <h1 class="text-3xl sm:text-4xl font-black tracking-tight uppercase">Feedback Pelatihan KKA Sarmi</h1>
+                <p class="text-indigo-200 mt-2 text-lg">Mohon berikan penilaian yang objektif untuk peningkatan kualitas pelatihan.</p>
             </div>
 
             <!-- Progress Bar -->
@@ -73,87 +88,224 @@
                         <div id="progress-bar" style="width:25%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-lime-400 transition-all duration-500"></div>
                     </div>
                 </div>
-                <div id="progress-text" class="text-center text-sm font-semibold text-indigo-200">Langkah 1 dari 4</div>
+                <div id="progress-text" class="text-center text-sm font-semibold text-indigo-200">Tahap 1 dari 4: Data Peserta</div>
+            </div>
+
+            <!-- Validation Message Box (Replaced Alert) -->
+            <div id="validation-message" class="bg-red-600 border-l-4 border-red-800 p-4 mb-6 rounded-lg shadow-lg hidden" role="alert">
+                <p class="font-bold">Perhatian!</p>
+                <p class="text-sm">Harap lengkapi semua kolom yang wajib diisi (bertanda *), termasuk menggeser slider penilaian.</p>
             </div>
 
             <!-- Form -->
             <form name="submit-to-google-sheet" id="feedbackForm">
                 <!-- Step 1: Data Diri -->
                 <div class="form-step active" data-step="1">
+                    <h2 class="text-xl font-bold mb-6 text-lime-400">Tahap 1: Data Peserta</h2>
                     <div class="space-y-6">
                         <div>
-                            <label for="nama" class="block text-sm font-bold mb-2 uppercase">Nama Lengkap</label>
-                            <input type="text" id="nama" name="Nama" class="w-full px-4 py-3 bg-indigo-500 border-2 border-transparent rounded-lg focus:outline-none focus:border-lime-400 transition" placeholder="Masukkan nama kamu" required>
+                            <label for="nama" class="block text-sm font-bold mb-2 uppercase">Nama Lengkap *</label>
+                            <input type="text" id="nama" name="Nama_Peserta" class="w-full px-4 py-3 bg-indigo-500 text-white border-2 border-transparent rounded-lg focus:outline-none focus:border-lime-400 transition" placeholder="Nama Lengkap Bapak/Ibu" required>
                         </div>
                         <div>
-                            <label for="sekolah" class="block text-sm font-bold mb-2 uppercase">Asal Sekolah</label>
-                            <input type="text" id="sekolah" name="Asal Sekolah" class="w-full px-4 py-3 bg-indigo-500 border-2 border-transparent rounded-lg focus:outline-none focus:border-lime-400 transition" placeholder="Contoh: SMA Negeri 1" required>
+                            <label for="asal_sekolah" class="block text-sm font-bold mb-2 uppercase">Asal Sekolah *</label>
+                            <input type="text" id="asal_sekolah" name="Asal_Sekolah" class="w-full px-4 py-3 bg-indigo-500 text-white border-2 border-transparent rounded-lg focus:outline-none focus:border-lime-400 transition" placeholder="Contoh: SMP Negeri 1 Sarmi" required>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- DROPDOWN KELAS PELATIHAN -->
                             <div>
-                                <label for="kelas" class="block text-sm font-bold mb-2 uppercase">Kelas</label>
-                                <select id="kelas" name="Kelas" class="w-full px-4 py-3 bg-indigo-500 border-2 border-transparent rounded-lg appearance-none focus:outline-none focus:border-lime-400 transition" required>
+                                <label for="kelas_pelatihan" class="block text-sm font-bold mb-2 uppercase">Kelas Pelatihan *</label>
+                                <select id="kelas_pelatihan" name="Kelas_Pelatihan" class="w-full px-4 py-3 bg-indigo-500 text-white border-2 border-transparent rounded-lg appearance-none focus:outline-none focus:border-lime-400 transition" required>
                                     <option value="" disabled selected>Pilih Kelas</option>
+                                    <!-- Options populated by JS -->
                                 </select>
                             </div>
                             <div>
-                                <label for="pertemuan" class="block text-sm font-bold mb-2 uppercase">Pertemuan</label>
-                                <select id="pertemuan" name="Pertemuan" class="w-full px-4 py-3 bg-indigo-500 border-2 border-transparent rounded-lg appearance-none focus:outline-none focus:border-lime-400 transition" required>
-                                    <option value="" disabled selected>Pilih Pertemuan</option>
+                                <label for="pertemuan" class="block text-sm font-bold mb-2 uppercase">Sesi Pertemuan *</label>
+                                <select id="pertemuan" name="Sesi_Pertemuan" class="w-full px-4 py-3 bg-indigo-500 text-white border-2 border-transparent rounded-lg appearance-none focus:outline-none focus:border-lime-400 transition" required>
+                                    <option value="" disabled selected>Pilih Sesi</option>
+                                    <!-- Options populated by JS -->
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="mt-10 flex justify-end">
-                        <button type="button" class="next-btn bg-lime-400 text-indigo-900 font-bold py-3 px-8 rounded-lg shadow-md hover:bg-lime-300 transition-transform transform hover:scale-105">Selanjutnya</button>
+                        <button type="button" class="next-btn bg-lime-400 text-indigo-900 font-bold py-3 px-8 rounded-xl shadow-md hover:bg-lime-300 transition-transform transform hover:scale-105">Lanjut ke Penilaian</button>
                     </div>
                 </div>
 
-                <!-- Step 2: Rating Pengajar -->
+                <!-- Step 2: Rating Instruktur (Guru) - Detailed -->
                 <div class="form-step" data-step="2">
-                    <h2 class="text-lg font-bold text-center mb-6">Seberapa baik pengajar menyampaikan materi?</h2>
-                    <div class="w-full max-w-md mx-auto">
-                        <input type="range" id="pengajar-rating" name="Rating Pengajar" min="1" max="5" value="3" class="w-full" required>
-                        <div id="pengajar-rating-value" class="text-center font-black text-5xl mt-4 text-lime-400">3</div>
-                        <div class="flex justify-between text-sm text-indigo-200 mt-2 px-2">
-                            <span>Kurang</span>
-                            <span>Sangat Baik</span>
+                    <h2 class="text-xl font-bold mb-6 text-lime-400">Tahap 2: Penilaian Instruktur (Pengajar)</h2>
+                    <!-- DIUBAH: <strong> menjadi <b> -->
+                    <p class="text-indigo-200 mb-6">Mohon berikan penilaian pada skala <b>1 (Sangat Kurang)</b> hingga <b>5 (Sangat Baik)</b>. Default adalah 5, geser jika ada hal yang perlu ditingkatkan.</p>
+                    
+                    <div id="guru-ratings" class="space-y-6">
+                        <!-- Kriteria 1: Penguasaan Materi -->
+                        <div class="mb-4">
+                            <!-- DIUBAH: ** menjadi <b> -->
+                            <label class="block text-sm font-semibold mb-2">1. Penguasaan Instruktur terhadap <b>materi</b> pelatihan. *</label>
+                            <input type="range" id="guru_r1" name="Instruktur_R1_Penguasaan" min="1" max="5" step="1" value="5" required>
+                            <div class="rating-labels">
+                                <span>1 (Sangat Kurang)</span>
+                                <span>5 (Sangat Baik)</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Kriteria 2: Kejelasan Komunikasi -->
+                        <div class="mb-4">
+                            <!-- DIUBAH: ** menjadi <b> -->
+                            <label class="block text-sm font-semibold mb-2">2. Kejelasan suara dan <b>cara komunikasi</b> dalam menyampaikan materi. *</label>
+                            <input type="range" id="guru_r2" name="Instruktur_R2_Komunikasi" min="1" max="5" step="1" value="5" required>
+                            <div class="rating-labels">
+                                <span>1 (Sangat Kurang)</span>
+                                <span>5 (Sangat Baik)</span>
+                            </div>
+                        </div>
+
+                        <!-- Kriteria 3: Keteraturan Alur -->
+                        <div class="mb-4">
+                            <!-- DIUBAH: ** menjadi <b> -->
+                            <label class="block text-sm font-semibold mb-2">3. Struktur dan alur penjelasan materi yang <b>teratur</b> dan logis. *</label>
+                            <input type="range" id="guru_r3" name="Instruktur_R3_Alur" min="1" max="5" step="1" value="5" required>
+                            <div class="rating-labels">
+                                <span>1 (Sangat Kurang)</span>
+                                <span>5 (Sangat Baik)</span>
+                            </div>
+                        </div>
+
+                        <!-- Kriteria 4: Sikap dan Keramahan -->
+                        <div class="mb-4">
+                            <!-- DIUBAH: ** menjadi <b> -->
+                            <label class="block text-sm font-semibold mb-2">4. Sikap <b>ramah</b> dan keterbukaan Instruktur terhadap pertanyaan peserta. *</label>
+                            <input type="range" id="guru_r4" name="Instruktur_R4_Sikap" min="1" max="5" step="1" value="5" required>
+                            <div class="rating-labels">
+                                <span>1 (Sangat Kurang)</span>
+                                <span>5 (Sangat Baik)</span>
+                            </div>
+                        </div>
+
+                        <!-- Kriteria 5: Gaya Mengajar -->
+                        <div class="mb-4">
+                            <!-- DIUBAH: ** menjadi <b> -->
+                            <label class="block text-sm font-semibold mb-2">5. Gaya mengajar Instruktur yang <b>menarik</b> dan memotivasi peserta. *</label>
+                            <input type="range" id="guru_r5" name="Instruktur_R5_Gaya" min="1" max="5" step="1" value="5" required>
+                            <div class="rating-labels">
+                                <span>1 (Sangat Kurang)</span>
+                                <span>5 (Sangat Baik)</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Kriteria 6: Pemberian Masukan -->
+                        <div class="mb-4">
+                            <!-- DIUBAH: ** menjadi <b> -->
+                            <label class="block text-sm font-semibold mb-2">6. Kualitas <b>masukan</b> dan bimbingan saat sesi latihan/pengerjaan tugas. *</label>
+                            <input type="range" id="guru_r6" name="Instruktur_R6_Masukan" min="1" max="5" step="1" value="5" required>
+                            <div class="rating-labels">
+                                <span>1 (Sangat Kurang)</span>
+                                <span>5 (Sangat Baik)</span>
+                            </div>
                         </div>
                     </div>
+
                     <div class="mt-10 flex justify-between">
-                        <button type="button" class="prev-btn bg-indigo-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-600 transition">Kembali</button>
-                        <button type="button" class="next-btn bg-lime-400 text-indigo-900 font-bold py-3 px-8 rounded-lg shadow-md hover:bg-lime-300 transition-transform transform hover:scale-105">Selanjutnya</button>
+                        <button type="button" class="prev-btn bg-indigo-500 text-white font-bold py-3 px-8 rounded-xl hover:bg-indigo-600 transition">Kembali</button>
+                        <button type="button" class="next-btn bg-lime-400 text-indigo-900 font-bold py-3 px-8 rounded-xl shadow-md hover:bg-lime-300 transition-transform transform hover:scale-105">Lanjut ke Materi</button>
                     </div>
                 </div>
 
-                <!-- Step 3: Rating Materi -->
+                <!-- Step 3: Rating Materi - Detailed -->
                 <div class="form-step" data-step="3">
-                    <h2 class="text-lg font-bold text-center mb-6">Seberapa puas kamu dengan materi yang diberikan?</h2>
-                    <div class="w-full max-w-md mx-auto">
-                        <input type="range" id="materi-rating" name="Rating Materi" min="1" max="5" value="3" class="w-full" required>
-                        <div id="materi-rating-value" class="text-center font-black text-5xl mt-4 text-lime-400">3</div>
-                        <div class="flex justify-between text-sm text-indigo-200 mt-2 px-2">
-                            <span>Kurang</span>
-                            <span>Sangat Puas</span>
+                    <h2 class="text-xl font-bold mb-6 text-lime-400">Tahap 3: Penilaian Materi Pelatihan</h2>
+                    <!-- DIUBAH: <strong> menjadi <b> -->
+                    <p class="text-indigo-200 mb-6">Beri penilaian pada skala <b>1 (Sangat Tidak Puas)</b> hingga <b>5 (Sangat Puas)</b> untuk setiap poin di bawah.</p>
+                    
+                    <div id="materi-ratings" class="space-y-6">
+                        <!-- Kriteria 1: Kelengkapan -->
+                        <div class="mb-4">
+                            <!-- DIUBAH: ** menjadi <b> -->
+                            <label class="block text-sm font-semibold mb-2">1. Kelengkapan dan kesesuaian <b>cakupan materi</b> dengan kebutuhan guru. *</label>
+                            <input type="range" id="materi_r1" name="Materi_R1_Kelengkapan" min="1" max="5" step="1" value="5" required>
+                            <div class="rating-labels">
+                                <span>1 (Sangat Tidak Puas)</span>
+                                <span>5 (Sangat Puas)</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Kriteria 2: Keterurutan -->
+                        <div class="mb-4">
+                            <!-- DIUBAH: ** menjadi <b> -->
+                            <label class="block text-sm font-semibold mb-2">2. Susunan dan urutan materi yang <b>mudah diikuti</b> dan dipahami. *</label>
+                            <input type="range" id="materi_r2" name="Materi_R2_Keterurutan" min="1" max="5" step="1" value="5" required>
+                            <div class="rating-labels">
+                                <span>1 (Sangat Tidak Puas)</span>
+                                <span>5 (Sangat Puas)</span>
+                            </div>
+                        </div>
+
+                        <!-- Kriteria 3: Kejelasan Konsep -->
+                        <div class="mb-4">
+                            <!-- DIUBAH: ** menjadi <b> -->
+                            <label class="block text-sm font-semibold mb-2">3. Penjelasan konsep-konsep teknis (misalnya, koding) yang <b>sangat jelas</b>. *</label>
+                            <input type="range" id="materi_r3" name="Materi_R3_Konsep" min="1" max="5" step="1" value="5" required>
+                            <div class="rating-labels">
+                                <span>1 (Sangat Tidak Puas)</span>
+                                <span>5 (Sangat Puas)</span>
+                            </div>
+                        </div>
+
+                        <!-- Kriteria 4: Manfaat -->
+                        <div class="mb-4">
+                            <!-- DIUBAH: ** menjadi <b> -->
+                            <label class="block text-sm font-semibold mb-2">4. Manfaat dan <b>relevansi materi</b> untuk diterapkan di sekolah. *</label>
+                            <input type="range" id="materi_r4" name="Materi_R4_Manfaat" min="1" max="5" step="1" value="5" required>
+                            <div class="rating-labels">
+                                <span>1 (Sangat Tidak Puas)</span>
+                                <span>5 (Sangat Puas)</span>
+                            </div>
+                        </div>
+
+                        <!-- Kriteria 5: Daya Tarik -->
+                        <div class="mb-4">
+                            <!-- DIUBAH: ** menjadi <b> -->
+                            <label class="block text-sm font-semibold mb-2">5. <b>Daya tarik</b> dan inovasi materi yang disajikan. *</label>
+                            <input type="range" id="materi_r5" name="Materi_R5_DayaTarik" min="1" max="5" step="1" value="5" required>
+                            <div class="rating-labels">
+                                <span>1 (Sangat Tidak Puas)</span>
+                                <span>5 (Sangat Puas)</span>
+                            </div>
                         </div>
                     </div>
+                    
                     <div class="mt-10 flex justify-between">
-                        <button type="button" class="prev-btn bg-indigo-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-600 transition">Kembali</button>
-                        <button type="button" class="next-btn bg-lime-400 text-indigo-900 font-bold py-3 px-8 rounded-lg shadow-md hover:bg-lime-300 transition-transform transform hover:scale-105">Selanjutnya</button>
+                        <button type="button" class="prev-btn bg-indigo-500 text-white font-bold py-3 px-8 rounded-xl hover:bg-indigo-600 transition">Kembali</button>
+                        <button type="button" class="next-btn bg-lime-400 text-indigo-900 font-bold py-3 px-8 rounded-xl shadow-md hover:bg-lime-300 transition-transform transform hover:scale-105">Lanjut ke Saran</button>
                     </div>
                 </div>
 
                 <!-- Step 4: Saran dan Pesan -->
                 <div class="form-step" data-step="4">
-                    <h2 class="text-lg font-bold text-center mb-4">Punya saran atau pesan?</h2>
-                     <div>
-                        <label for="saran" class="block text-sm font-bold mb-2 uppercase">Saran & Pesan</label>
-                        <textarea id="saran" name="Saran & Pesan" rows="5" class="w-full px-4 py-3 bg-indigo-500 border-2 border-transparent rounded-lg focus:outline-none focus:border-lime-400 transition" placeholder="Tuliskan saran dan pesanmu di sini..."></textarea>
+                    <h2 class="text-xl font-bold mb-6 text-lime-400">Tahap 4: Saran dan Masukan</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label for="saran_instruktur" class="block text-sm font-bold mb-2 uppercase">Saran untuk Instruktur</label>
+                            <textarea id="saran_instruktur" name="Saran_Instruktur" rows="3" class="w-full px-4 py-3 bg-indigo-500 text-white border-2 border-transparent rounded-lg focus:outline-none focus:border-lime-400 transition" placeholder="Tuliskan saran konstruktif untuk peningkatan kualitas mengajar Instruktur..."></textarea>
+                        </div>
+                        <div>
+                            <label for="saran_materi" class="block text-sm font-bold mb-2 uppercase">Saran untuk Materi Pelatihan</label>
+                            <textarea id="saran_materi" name="Saran_Materi" rows="3" class="w-full px-4 py-3 bg-indigo-500 text-white border-2 border-transparent rounded-lg focus:outline-none focus:border-lime-400 transition" placeholder="Materi apa lagi yang perlu ditambahkan atau disempurnakan di pelatihan mendatang?"></textarea>
+                        </div>
+                        <div>
+                            <label for="pesan_umum" class="block text-sm font-bold mb-2 uppercase">Pesan dan Kesan Umum</label>
+                            <textarea id="pesan_umum" name="Pesan_Umum" rows="3" class="w-full px-4 py-3 bg-indigo-500 text-white border-2 border-transparent rounded-lg focus:outline-none focus:border-lime-400 transition" placeholder="Pesan umum atau kesan Bapak/Ibu terhadap keseluruhan pelatihan."></textarea>
+                        </div>
                     </div>
+                    
                     <div class="mt-10 flex justify-between">
-                        <button type="button" class="prev-btn bg-indigo-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-600 transition">Kembali</button>
-                        <button type="submit" id="submit-btn" class="bg-lime-400 text-indigo-900 font-bold py-3 px-8 rounded-lg shadow-md hover:bg-lime-300 transition-transform transform hover:scale-105">
-                            Kirim Jawaban
+                        <button type="button" class="prev-btn bg-indigo-500 text-white font-bold py-3 px-8 rounded-xl hover:bg-indigo-600 transition">Kembali</button>
+                        <button type="submit" id="submit-btn" class="bg-lime-400 text-indigo-900 font-bold py-3 px-8 rounded-xl shadow-md hover:bg-lime-300 transition-transform transform hover:scale-105">
+                            Kirim Feedback
                         </button>
                     </div>
                 </div>
@@ -162,19 +314,21 @@
 
         <!-- Thank You Message -->
         <div id="thank-you-message" class="text-center p-10 bg-[#3C29E7] text-white rounded-2xl shadow-2xl" style="display: none;">
-            <h2 class="text-3xl font-black mb-4">Terima Kasih! ✨</h2>
-            <p class="text-indigo-200">Feedback kamu telah kami terima dan sangat berarti bagi kami.</p>
-             <button type="button" id="reset-btn" class="mt-8 bg-lime-400 text-indigo-900 font-bold py-3 px-8 rounded-lg shadow-md hover:bg-lime-300 transition-transform transform hover:scale-105">Isi Form Lagi</button>
+            <h2 class="text-3xl font-black mb-4">Terima Kasih Atas Feedback Anda! 🙏</h2>
+            <p class="text-indigo-200">Masukan Bapak/Ibu sangat berharga untuk perbaikan pelatihan kami selanjutnya.</p>
+            <button type="button" id="reset-btn" class="mt-8 bg-lime-400 text-indigo-900 font-bold py-3 px-8 rounded-xl shadow-md hover:bg-lime-300 transition-transform transform hover:scale-105">Isi Form Lagi</button>
         </div>
     </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const scriptURL = 'https://script.google.com/macros/s/AKfycby89VsTrRGasPQbFRfX6zDrzp1i3S-E-kEk7U7WlDg5rIQuXyCxCvvLPgwt-6uphJVOLw/exec'; // <-- URL SUDAH DIGANTI
+        // GANTI DENGAN URL DEPLOYMENT SCRIPT GOOGLE APPS ANDA
+        const scriptURL = 'https://script.google.com/macros/s/AKfycby89VsTrRGasPQbFRfX6zDrzp1i3S-E-kEk7U7WlDg5rIQuXyCxCvvLPgwt-6uphJVOLw/exec'; 
         const form = document.forms['submit-to-google-sheet'];
         const formContainer = document.getElementById('feedback-form-container');
         const thankYouMessage = document.getElementById('thank-you-message');
         const submitBtn = document.getElementById('submit-btn');
+        const validationMessage = document.getElementById('validation-message');
         const resetBtn = document.getElementById('reset-btn');
 
         // Navigasi Form
@@ -185,6 +339,21 @@
         const progressText = document.getElementById('progress-text');
         let currentStep = 0;
 
+        // Teks untuk setiap tahap
+        const stepTexts = [
+            "Tahap 1 dari 4: Data Peserta",
+            "Tahap 2 dari 4: Penilaian Instruktur",
+            "Tahap 3 dari 4: Penilaian Materi",
+            "Tahap 4 dari 4: Saran dan Masukan"
+        ];
+        
+        // Daftar input range yang perlu direset
+        const ratingInputs = document.querySelectorAll('input[type="range"]');
+
+        const showValidationMessage = (isVisible) => {
+            validationMessage.style.display = isVisible ? 'block' : 'none';
+        };
+
         const showStep = (stepIndex) => {
             steps.forEach((step, index) => {
                 step.classList.toggle('active', index === stepIndex);
@@ -192,23 +361,37 @@
             const totalSteps = steps.length;
             const progress = ((stepIndex + 1) / totalSteps) * 100;
             progressBar.style.width = `${progress}%`;
-            progressText.textContent = `Langkah ${stepIndex + 1} dari ${totalSteps}`;
+            progressText.textContent = stepTexts[stepIndex];
+            showValidationMessage(false); // Sembunyikan pesan validasi saat pindah step
         };
 
         const validateStep = (stepIndex) => {
             const currentStepElement = steps[stepIndex];
-            const inputs = currentStepElement.querySelectorAll('input[required], select[required]');
+            // Cari semua elemen wajib (required) di step ini: input text/select dan input range
+            const requiredElements = currentStepElement.querySelectorAll('input[required], select[required], textarea[required]');
             let isValid = true;
-            for (const input of inputs) {
-                // Cek apakah input punya value. Untuk text input, cek setelah di-trim.
-                if (!input.value || (typeof input.value === 'string' && !input.value.trim())) {
-                    isValid = false;
-                    break;
-                }
-            }
+            let firstInvalidElement = null;
+
+            requiredElements.forEach(input => {
+                // Khusus untuk range, kita asumsikan sudah ada value karena ada default=5
+                // Tapi kita cek apakah ada perubahan (jika ingin lebih ketat), namun untuk simplisitas kita hanya cek value.
+                if (input.type === 'text' || input.tagName === 'SELECT' || input.tagName === 'TEXTAREA') {
+                    if (!input.value || (typeof input.value === 'string' && !input.value.trim())) {
+                        isValid = false;
+                        if (!firstInvalidElement) firstInvalidElement = input;
+                    }
+                } 
+                // Semua input range memiliki value default (5) dan required, sehingga selalu valid.
+            });
 
             if (!isValid) {
-                alert('Harap isi semua kolom yang wajib diisi.');
+                showValidationMessage(true);
+                // Scroll ke elemen yang tidak valid
+                if (firstInvalidElement) {
+                    firstInvalidElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            } else {
+                showValidationMessage(false);
             }
             return isValid;
         };
@@ -231,11 +414,10 @@
             });
         });
 
-        // Populasi Dropdown
-        const kelasDropdown = document.getElementById('kelas');
-        const pertemuanDropdown = document.getElementById('pertemuan');
+        // Populasi Dropdown Kelas Pelatihan (Kelas A - O)
+        const kelasDropdown = document.getElementById('kelas_pelatihan');
 
-        // Kelas A - O
+        // Kelas A - O (ASCII 65=A, 79=O)
         for (let i = 65; i <= 79; i++) {
             const letter = String.fromCharCode(i);
             const option = document.createElement('option');
@@ -244,29 +426,26 @@
             kelasDropdown.appendChild(option);
         }
 
+        // Populasi Dropdown Pertemuan
+        const pertemuanDropdown = document.getElementById('pertemuan');
+        
         // Pertemuan 1-8 (tanpa 4)
         for (let i = 1; i <= 8; i++) {
             if (i === 4) continue;
             const option = document.createElement('option');
             option.value = `Pertemuan ${i}`;
-            option.textContent = `Pertemuan ${i}`;
+            option.textContent = `Sesi Pertemuan ${i}`;
             pertemuanDropdown.appendChild(option);
         }
         
-        // --- LOGIKA SLIDER BARU ---
-        const pengajarSlider = document.getElementById('pengajar-rating');
-        const pengajarValueDisplay = document.getElementById('pengajar-rating-value');
-        const materiSlider = document.getElementById('materi-rating');
-        const materiValueDisplay = document.getElementById('materi-rating-value');
-
-        pengajarSlider.addEventListener('input', (event) => {
-            pengajarValueDisplay.textContent = event.target.value;
-        });
-
-        materiSlider.addEventListener('input', (event) => {
-            materiValueDisplay.textContent = event.target.value;
-        });
-        // --- AKHIR LOGIKA SLIDER BARU ---
+        // --- SLIDER LOGIC ---
+        // Semua slider kini memiliki default 5, tidak perlu display value di UI, 
+        // namun jika ingin menambahkan display value:
+        // const addSliderValueDisplay = (sliderId) => {
+        //     const slider = document.getElementById(sliderId);
+        //     // Tambahkan elemen display di sebelah slider
+        // };
+        // --- END SLIDER LOGIC ---
 
 
         // Submit Form
@@ -275,31 +454,32 @@
             if (!validateStep(currentStep)) return;
 
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Mengirim...';
+            submitBtn.textContent = 'Mengirim Data...';
 
-            // Membuat FormData dan menambahkan nama sheet
             const formData = new FormData(form);
-            formData.append('sheetName', 'class_feedback'); // <-- NAMA SHEET DITAMBAHKAN DI SINI
+            formData.append('sheetName', 'Feedback_KKA_Sarmi_2025'); 
 
-            fetch(scriptURL, { method: 'POST', body: formData}) // Menggunakan formData yang sudah dimodifikasi
-                .then(response => {
-                    console.log('Success!', response);
+            fetch(scriptURL, { method: 'POST', body: formData}) 
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success!', data);
                     formContainer.style.display = 'none';
                     thankYouMessage.style.display = 'block';
                     form.reset();
-                    // Reset slider values to default
-                    pengajarValueDisplay.textContent = '3';
-                    materiValueDisplay.textContent = '3';
+                    // Reset semua slider ke nilai default 5
+                    ratingInputs.forEach(input => input.value = '5');
                     currentStep = 0;
                     showStep(currentStep);
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
-                    alert('Terjadi kesalahan. Silakan coba lagi.');
+                    // Gunakan pesan visual pengganti alert
+                    validationMessage.innerHTML = `<p class="font-bold">Error Pengiriman!</p><p class="text-sm">Terjadi kesalahan saat mengirim data. Silakan cek koneksi atau coba lagi. (${error.message})</p>`;
+                    showValidationMessage(true);
                 })
                 .finally(() => {
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'Kirim Jawaban';
+                    submitBtn.textContent = 'Kirim Feedback';
                 });
         });
 
@@ -309,9 +489,9 @@
             thankYouMessage.style.display = 'none';
         });
 
+        // Inisialisasi tampilan awal
         showStep(currentStep);
     });
 </script>
 </body>
 </html>
-
