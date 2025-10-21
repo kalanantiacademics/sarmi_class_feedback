@@ -373,15 +373,12 @@
             let firstInvalidElement = null;
 
             requiredElements.forEach(input => {
-                // Khusus untuk range, kita asumsikan sudah ada value karena ada default=5
-                // Tapi kita cek apakah ada perubahan (jika ingin lebih ketat), namun untuk simplisitas kita hanya cek value.
-                if (input.type === 'text' || input.tagName === 'SELECT' || input.tagName === 'TEXTAREA') {
-                    if (!input.value || (typeof input.value === 'string' && !input.value.trim())) {
-                        isValid = false;
-                        if (!firstInvalidElement) firstInvalidElement = input;
-                    }
-                } 
-                // Semua input range memiliki value default (5) dan required, sehingga selalu valid.
+                // Semua input wajib harus memiliki nilai
+                if (!input.value || (typeof input.value === 'string' && !input.value.trim())) {
+                    isValid = false;
+                    if (!firstInvalidElement) firstInvalidElement = input;
+                }
+                // Catatan: Input range selalu memiliki nilai default, jadi fokus ke input teks/select/textarea
             });
 
             if (!isValid) {
@@ -438,16 +435,6 @@
             pertemuanDropdown.appendChild(option);
         }
         
-        // --- SLIDER LOGIC ---
-        // Semua slider kini memiliki default 5, tidak perlu display value di UI, 
-        // namun jika ingin menambahkan display value:
-        // const addSliderValueDisplay = (sliderId) => {
-        //     const slider = document.getElementById(sliderId);
-        //     // Tambahkan elemen display di sebelah slider
-        // };
-        // --- END SLIDER LOGIC ---
-
-
         // Submit Form
         form.addEventListener('submit', e => {
             e.preventDefault();
@@ -457,7 +444,9 @@
             submitBtn.textContent = 'Mengirim Data...';
 
             const formData = new FormData(form);
-            formData.append('sheetName', 'Feedback_KKA_Sarmi_2025'); 
+            
+            // --- PERBAIKAN UTAMA DI SINI: SESUAIKAN DENGAN NAMA SHEET YANG DIINGINKAN ---
+            formData.append('sheetName', 'feedback_guru'); 
 
             fetch(scriptURL, { method: 'POST', body: formData}) 
                 .then(response => response.json())
